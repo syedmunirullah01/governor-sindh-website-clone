@@ -20,7 +20,7 @@ const Header = () => {
           </div>
           <div>
             <nav>
-              <ul className="flex gap-12 items-center">
+              <ul className="flex gap-12 items-center font-bold">
                 <Link href="/">
                   <li>Home</li>
                 </Link>
