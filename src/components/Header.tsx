@@ -4,14 +4,19 @@ import Link from "next/link";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="bg-[#044E83] md:py-7 py-4 z-50 text-white  sticky top-0">
+    <header className="bg-[#044E83] md:py-7 py-4 z-50 text-white sticky top-0">
       <div className="max-w-[88%] mx-auto">
+        {/* Desktop Menu */}
         <div className="md:flex justify-end gap-16 items-center hidden">
           <div className="absolute left-14 top-6">
-            <Image src="/logo.png" alt="logo" width={90} height={90} />
+            <Link href="/">
+              <Image src="/logo.png" alt="logo" width={90} height={90} />
+            </Link>
           </div>
           <div>
             <h2 className="text-xl font-semibold text-[#B9D8F3]">
@@ -24,22 +29,24 @@ const Header = () => {
                 <Link href="/">
                   <li>Home</li>
                 </Link>
-                <Link href="/">
+                <Link href="/apply">
                   <li>Apply</li>
                 </Link>
-                <Link href="/">
+                <Link href="/job">
                   <li>Job</li>
                 </Link>
-                <Link href="/">
+                <Link href="/result">
                   <li>Result</li>
                 </Link>
-                <Link href="/">
+                <Link href="/courses">
                   <li>Courses</li>
                 </Link>
               </ul>
             </nav>
           </div>
         </div>
+
+        {/* Mobile Menu */}
         <div className="md:hidden flex justify-end gap-12 items-center">
           <div className="absolute left-4 top-4">
             <Image src="/logo.png" alt="logo" width={70} height={70} />
@@ -52,39 +59,39 @@ const Header = () => {
           <div className="relative z-10">
             {isOpen ? (
               <CloseIcon
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => setIsOpen(false)}
                 className="cursor-pointer text-3xl"
               />
             ) : (
               <MenuIcon
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => setIsOpen(true)}
                 className="cursor-pointer"
               />
             )}
           </div>
-          {isOpen ? (
-            <div className="absolute right-0 w-full h-screen top-0 bg-[#044E83]">
+          {isOpen && (
+            <div className="fixed inset-0 bg-[#044E83]">
               <nav className="mt-24 max-w-[90%] mx-auto">
-                <ul className="flex flex-col gap-10 items-start">
-                  <Link href="/">
+                <ul className="flex flex-col gap-10 items-start font-bold text-lg">
+                  <Link href="/" onClick={() => setIsOpen(false)}>
                     <li>Home</li>
                   </Link>
-                  <Link href="/">
+                  <Link href="/apply" onClick={() => setIsOpen(false)}>
                     <li>Apply</li>
                   </Link>
-                  <Link href="/">
+                  <Link href="/job" onClick={() => setIsOpen(false)}>
                     <li>Job</li>
                   </Link>
-                  <Link href="/">
+                  <Link href="/result" onClick={() => setIsOpen(false)}>
                     <li>Result</li>
                   </Link>
-                  <Link href="/">
+                  <Link href="/courses" onClick={() => setIsOpen(false)}>
                     <li>Courses</li>
                   </Link>
                 </ul>
               </nav>
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </header>
